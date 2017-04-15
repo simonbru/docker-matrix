@@ -1,7 +1,11 @@
-
+env:
+  global:
+  - secure: quixYkiZDt0I5SQxUmgZNElS27JPicvYGBy3dmj8oNLT+uECiY062ASulb8mu29QhfG8A/Q7aIkeIWzHG2qtKLIEJK0nwh7k4kKx5jFnyaeFNJYemiSdZx/rEn3iW4GI+iv4OBVzLhZMUbgySv/zOZHF96RT3ZHpEAR1SdIzyFhEKP5Q9fphMwc7ihDdaMi3SL63gofKnWSvcOwZXgVpwTWmqicQr4mFU+7uCIH9x4/WlWHeTAL4S8qa+QXi87Hfn0B/DWDms4JCCWTcYJG8tK+fjnyk1ULAL/s8qQlTjc6R0Lgc3RA+hue3Dani5TZyBKpEYKpUdEUeEOkzjgrHFpV6hxfN7YBCV7dpS3knl8kWCCDK+wZQus/yI8XjYkHWG1EEuhZJ1yAxPllDf7Ixn8hswhLOSQrH58DtDQGe89/ZkpI0GS2PLWixUGdPeiAmTOZMYjoIvO/KvwCFoauh9Mf1APTGTaoEs9Il7I8MW5kSsH38+6a/rT8FtAVLwQcEbyLBaEshK7YW48n7kawS+u0grb85t0PNb9JucPtdphXuUS3GtiaeeiW5d/92MqbflTvvq9Nks/hU+3TpZJBseRb+ybO3EUOPFgetR6IweqV8p6kXY25Lc6ZzaC3FhPjZWWBWZTZ9XaxNSJzh2iSXjSXtNhWlJqOsQ5y4qZi7P+E= # DOCKER_USERNAME
+  - secure: BYolhz5ugsd6jye/sK/g6sdAMdIolU0WhVZ8yo7tvROvp92buEKz3SbaSoR5NiMPNPwEi8u7FgDPzJX3gyA0WYGhquFKCy0JbFoYz8Xp3vfbhthWY0mD0gOrzOSwRvwIWj5eX4vU3wiFMczpIVt+eO7dC2F5yni4YgCo9+LvlCOAWlmiFryJYvgJ5aWFZjwDb7F/dvugGe6TlhvHc9xFF0nOUcK85+Mrth89K4ff6a0XkQdvdTmHCjdV+qSV1uUt8IVYEQxWLt5zqN3Bmn0n5MaWnyAr2W5Hi8ze23oY25BgLFHPzP7VJcdPgEp0eKeugHQPKZ9iAnVzVdN0ROBHP0s96MQbmIVWLf158DtL8+hpklwDhEz31kOU6mqIdGiDkLe2zliGGURRr3I66aiuRDuMZLq5X+tXNq6hmahAS3sPnVp5/EuSN4B3WD6Ler/nfuP4NHbmfeEHUT4OL0bYqeCcdLXwC+xxh6pWhSF16XKUoc7I15NjQ5kRTrb0BOb5BVrwd34skmIXiu79oOMcvyXISmUoNksgAo+vffzbFfoi05a3l24jahEXkl4s9OkvVQkIddyG6PAXpcEZHkmg0hj/rnjmEH/mN3/dHtBC5liEcO5o3VFzYHq+XzTqHf+XnTv/8QSP0JNNiMwsINGYqnh+OH8i3TFmosQXGSnLmo8= # DOCKER_PASSWORD
 services:
-        - docker
-
+- docker
 script:
-        # only docker build test
-        - docker build -t jocelynthode/docker-matrix .
+- docker build -t jocelynthode/docker-matrix .
+after_success:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  docker push $DOCKER_USERNAME/docker-matrix; fi

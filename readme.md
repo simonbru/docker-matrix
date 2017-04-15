@@ -1,5 +1,5 @@
 
-# Introduction
+# Introduction [![Build Status](https://travis-ci.org/jocelynthode/docker-matrix.svg?branch=master)](https://travis-ci.org/jocelynthode/docker-matrix)
 
 Dockerfile for installation of [matrix] open federated Instant Messaging and
 VoIP communication server.
