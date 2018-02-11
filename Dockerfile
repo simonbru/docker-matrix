@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:jessie
 
 # Maintainer
 MAINTAINER Jocelyn Thode <jocelyn.thode@test.com>
