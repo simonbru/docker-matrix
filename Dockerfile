@@ -1,7 +1,7 @@
-FROM debian:jessie
+FROM debian:stretch
 
 # Maintainer
-MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
+MAINTAINER Jocelyn Thode <jocelyn.thode@test.com>
 
 # install homerserver template
 COPY adds/start.sh /start.sh
