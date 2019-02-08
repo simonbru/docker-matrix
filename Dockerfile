@@ -22,7 +22,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -qq \
     && apt-get install -yq --no-install-recommends \
         dumb-init \
-        matrix-synapse \
+        matrix-synapse-py3 \
         ## Suggested deps for email notifications \
         # python-bleach python-jinja2 \
     && rm -rf /var/lib/apt/lists/*
@@ -36,7 +36,7 @@ RUN groupadd -r -g $MATRIX_GID matrix \
 ## startup configuration
 COPY adds/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "-m", "synapse.app.homeserver", "-c", "/data/conf/matrix-server.yaml"]
+CMD ["/opt/venvs/matrix-synapse/bin/python", "-m", "synapse.app.homeserver", "-c", "/data/conf/matrix-server.yaml"]
 USER matrix
 EXPOSE 8448
 VOLUME ["/data"]
