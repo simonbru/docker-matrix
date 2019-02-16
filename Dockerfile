@@ -26,7 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         ## Suggested deps for email notifications \
         # python-bleach python-jinja2 \
     && rm -rf /var/lib/apt/lists/*
-RUN dpkg-query --show -f '${Version}' matrix-synapse >/synapse.version
+RUN dpkg-query --show -f '${Version}' matrix-synapse-py3 >/synapse.version
 
 ## user configuration
 ENV MATRIX_UID=991 MATRIX_GID=991
