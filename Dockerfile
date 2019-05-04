@@ -1,21 +1,14 @@
-## We need to install gnupg to import the repo key
-FROM debian:stretch-slim as keyring
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update -qq \
-    && apt-get install -yq gnupg \
-    && rm -rf /var/lib/apt/lists/*
-COPY adds/matrix-repo-key.asc /
-## equivalent to RUN apt-key --keyring /matrix.gpg add /matrix-repo-key.asc
-RUN touch /matrix.gpg && gpg --no-default-keyring --keyring /matrix.gpg \
-    --quiet --import /matrix-repo-key.asc
-
-
 FROM debian:stretch-slim
 
+## enable HTTPS repositories
+RUN apt-get update -qq \
+    && apt-get install -yq apt-transport-https \
+    && rm -rf /var/lib/apt/lists/*
+
 ## setup repository
-COPY --from=keyring /matrix.gpg /etc/apt/trusted.gpg.d/
-RUN echo 'deb http://matrix.org/packages/debian/ stretch main' \
+RUN echo 'deb https://packages.matrix.org/debian/ stretch main' \
         > /etc/apt/sources.list.d/matrix.list
+COPY adds/matrix-org-archive-keyring.gpg /etc/apt/trusted.gpg.d/
 
 ## install latest version of matrix
 RUN export DEBIAN_FRONTEND=noninteractive \
