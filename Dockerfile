@@ -14,7 +14,6 @@ COPY adds/matrix-org-archive-keyring.gpg /etc/apt/trusted.gpg.d/
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -qq \
     && apt-get install -yq --no-install-recommends \
-        dumb-init \
         matrix-synapse-py3 \
         ## Suggested deps for email notifications \
         # python-bleach python-jinja2 \
